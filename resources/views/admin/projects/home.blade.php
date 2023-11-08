@@ -13,7 +13,10 @@
 
         @endif
 
-        <h4 class="text-muted text-uppercase">All Projects</h4>
+        <div class="d-flex justify-content-between mb-3">
+            <h4 class="text-muted text-uppercase">All Projects</h4>
+            <a href="{{route('projects.create')}}" class="btn btn-primary">Create Project</a>
+        </div>
 
         <div class="card">
 
