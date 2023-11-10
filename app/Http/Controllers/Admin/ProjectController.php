@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 
 class ProjectController extends Controller
@@ -18,7 +19,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::paginate(4);
-        return view('admin.projects.home', compact('projects'));
+
+        return view('admin.projects.home',compact('projects'));
     }
 
     /**
@@ -54,7 +56,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        return view('admin.projects.show',compact('project'));
     }
 
     /**
@@ -62,7 +64,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit',compact('project'));
     }
 
     /**
@@ -70,6 +72,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        
         $validate_data = $request->validated();
 
         if ($request->has('cover_image') && $project->cover_image) {
@@ -82,8 +85,13 @@ class ProjectController extends Controller
             $validate_data['cover_image'] = $path;
         }
 
+        if (!Str::is($project->getOriginal('title'), $request->title)) {
+
+            $validate_data['slug'] = $project->generateSlug($request->title);
+        }
+
         $project->update($validate_data);
-        return to_route('projects.show', $project);
+        return to_route('admin.projects.show',$project);
     }
 
     /**
@@ -95,6 +103,6 @@ class ProjectController extends Controller
             Storage::delete($project->cover_image);
         }
         $project->delete();
-        return to_route('projects.index')->with('message', 'Il progetto è stato eliminato correttamente ✅');
+        return to_route('admin.projects.index')->with('message', 'Il progetto è stato eliminato correttamente ✅');
     }
 }

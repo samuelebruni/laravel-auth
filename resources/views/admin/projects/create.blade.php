@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{route('projects.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
 
         <!-- // Attention to Cross site request forgery attacks -->
         @csrf
@@ -38,7 +38,7 @@
 
         <div class="mb-3">
             <label for="cover_image" class="form-label">Choose file</label>
-            <input type="file" class="form-control" name="cover_image" id="cover_image" placeholder="" aria-describedby="cover_image_helper">
+            <input type="file" class="form-control" name="cover_image" id="cover_image" placeholder="" aria-describedby="cover_imagehelper">
             <div id="cover_image_helper" class="form-text">Upload an image for the current product</div>
         </div>
 

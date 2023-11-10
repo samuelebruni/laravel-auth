@@ -20,6 +20,8 @@
             <img width="250" class=" img-fluid" src="{{asset('storage/' . $project->cover_image)}}" alt="">
         @endif
     </div>
+    <div>{{$project->project_link}}</div>
+    <div>{{$project->online_link}}</div>
 </div>
 
 @endsection
