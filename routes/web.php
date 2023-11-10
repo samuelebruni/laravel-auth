@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function (){
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('admin/projects', ProjectController::class);
 });
 
 Route::middleware('auth')->group(function () {
@@ -20,6 +21,5 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::resource('admin/projects', ProjectController::class);
 
 require __DIR__.'/auth.php';

@@ -21,6 +21,8 @@ class ProjectSeeder extends Seeder
             $project->slug = Str::slug($project->title, '-');
             $project->description = $faker->realText();
             $project->cover_image = 'placeholder/' . $faker->image('public/storage/placeholder', category: 'Posts', fullPath: false);
+            $project->project_link = $faker->url();
+            $project->online_link = $faker->url();
             $project->save();
         }
     }
