@@ -23,6 +23,9 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:50',
+            'project_link' => 'nullable|min:2',
+            'description' => 'nullable',
+            'online_link' => 'nullable'
         ];
     }
 }

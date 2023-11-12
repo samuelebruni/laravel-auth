@@ -48,7 +48,7 @@ class ProjectController extends Controller
  
          $project = Project::create($validate_data);
  
-         return to_route('projects.show', $project);
+         return to_route('admin.projects.show', $project);
     }
 
     /**
